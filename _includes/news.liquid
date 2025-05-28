@@ -16,7 +16,31 @@
         {% endif %}
         {% for item in news limit: news_limit %}
           <tr>
-            <th scope="row" style="width: 20%">{{ item.date | date: '%b %d, %Y' }}</th>
+            <th scope="row" style="width: 20%">
+              {% if item.endDatePres == false or item.endDatePres == 'false' %}
+                {%- if item.startDate -%}
+                  {{ item.startDate | date: '%b %Y' }} - present
+                {%- else -%}
+                  {{ item.date | date: '%b %Y' }}
+                {%- endif -%}
+              {% else %}
+                {%- if item.startDate and item.date -%}
+                  {% assign start_year = item.startDate | date: '%Y' %}
+                  {% assign end_year = item.date | date: '%Y' %}
+                  {% assign start_month = item.startDate | date: '%b' %}
+                  {% assign end_month = item.date | date: '%b' %}
+                  {% if start_year != end_year %}
+                    {{ start_month }} {{ start_year }} - {{ end_month }} {{ end_year }}
+                  {% else %}
+                    {{ start_month }} - {{ end_month }} {{ start_year }}
+                  {% endif %}
+                {%- elsif item.startDate -%}
+                  {{ item.startDate | date: '%b %Y' }}
+                {%- else -%}
+                  {{ item.date | date: '%b %Y' }}
+                {%- endif -%}
+              {% endif %}
+            </th>
             <td>
               {% if item.inline %}
                 {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}

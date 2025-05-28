@@ -1,8 +1,11 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+startDate: 2024-08-31 16:11:00-0400
+date: 2026-05-31 16:11:00-0400
+endDatePres: false
 inline: true
-related_posts: false
 ---
 
-A simple inline announcement.
+<b><b>M.S. in Computer Science at NYU</b></b>
+<br>
+Currently pursuing my Master's Degree in Computer Science at the Tandon School of Engineering.

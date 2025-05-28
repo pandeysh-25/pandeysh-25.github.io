@@ -1,8 +1,11 @@
 ---
 layout: post
-date: 2016-01-15 07:59:00-0400
+startDate: 2020-10-30 16:11:00-0400
+date: 2024-08-05 16:11:00-0400
+endDatePres: true
 inline: true
-related_posts: false
 ---
 
-A simple inline announcement with Markdown emoji! :sparkles: :smile:
+Graduated from BITS Pilani, Hyderabad.
+<br>
+Finished my Bachelors in Computer Science degree, along with a Minor in Data Science. Graduated in the First Division. 

@@ -2,29 +2,32 @@
 
 // Toggle through light, dark, and system theme settings.
 let toggleThemeSetting = () => {
-  let themeSetting = determineThemeSetting();
-  if (themeSetting == "system") {
-    setThemeSetting("light");
-  } else if (themeSetting == "light") {
-    setThemeSetting("dark");
-  } else {
-    setThemeSetting("system");
-  }
+  let theme = determineComputedTheme();
+  setThemeSetting(theme === "light" ? "dark" : "light");
 };
+
+// Set theme immediately on script load to avoid flicker
+(function() {
+  let themeSetting = localStorage.getItem("theme");
+  if (themeSetting !== "dark" && themeSetting !== "light") {
+    themeSetting = "light";
+    localStorage.setItem("theme", themeSetting);
+  }
+  document.documentElement.setAttribute("data-theme-setting", themeSetting);
+  document.documentElement.setAttribute("data-theme", themeSetting);
+})();
 
 // Change the theme setting and apply the theme.
 let setThemeSetting = (themeSetting) => {
   localStorage.setItem("theme", themeSetting);
-
   document.documentElement.setAttribute("data-theme-setting", themeSetting);
-
   applyTheme();
 };
 
 // Apply the computed dark or light theme to the website.
 let applyTheme = () => {
   let theme = determineComputedTheme();
-
+  document.documentElement.setAttribute("data-theme", theme);
   transTheme();
   setHighlight(theme);
   setGiscusTheme(theme);
@@ -251,48 +254,30 @@ let transTheme = () => {
   }, 500);
 };
 
-// Determine the expected state of the theme toggle, which can be "dark", "light", or
-// "system". Default is "system".
+// Only allow 'light' and 'dark' theme settings. Default to 'light'.
 let determineThemeSetting = () => {
   let themeSetting = localStorage.getItem("theme");
-  if (themeSetting != "dark" && themeSetting != "light" && themeSetting != "system") {
-    themeSetting = "system";
+  if (themeSetting !== "dark" && themeSetting !== "light") {
+    themeSetting = "light";
   }
   return themeSetting;
 };
 
-// Determine the computed theme, which can be "dark" or "light". If the theme setting is
-// "system", the computed theme is determined based on the user's system preference.
+// Only allow 'light' and 'dark' as computed theme.
 let determineComputedTheme = () => {
   let themeSetting = determineThemeSetting();
-  if (themeSetting == "system") {
-    const userPref = window.matchMedia;
-    if (userPref && userPref("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    } else {
-      return "light";
-    }
-  } else {
-    return themeSetting;
-  }
+  return themeSetting;
 };
 
 let initTheme = () => {
   let themeSetting = determineThemeSetting();
-
   setThemeSetting(themeSetting);
-
-  // Add event listener to the theme toggle button.
   document.addEventListener("DOMContentLoaded", function () {
     const mode_toggle = document.getElementById("light-toggle");
-
-    mode_toggle.addEventListener("click", function () {
-      toggleThemeSetting();
-    });
-  });
-
-  // Add event listener to the system theme preference change.
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
-    applyTheme();
+    if (mode_toggle) {
+      mode_toggle.addEventListener("click", function () {
+        toggleThemeSetting();
+      });
+    }
   });
 };

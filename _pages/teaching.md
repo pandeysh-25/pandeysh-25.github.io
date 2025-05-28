@@ -1,12 +1,20 @@
 ---
 layout: page
 permalink: /teaching/
-title: teaching
-description: Materials for courses you taught. Replace this text with your description.
+title: Teaching
+description: These are the courses/topics I have taught (so far).
 nav: true
-nav_order: 6
+nav_order: 4
 ---
 
-For now, this page is assumed to be a static description of your courses. You can convert it to a collection similar to `_projects/` so that you can have a dedicated page for each course.
+<h5 class="year">At NYU</h5>
+<ul>
+    <li>CSCI-UA 0469: Natural Language Processing
+    <br> Spring 2025, under Prof. Adam Meyers </li>
+</ul>
 
-Organize your courses by years, topics, or universities, however you like!
+<h5 class="year">At BITS</h5>
+<ul>
+    <li>CS F222: Discrete Structures in Computer Science
+    <br> Fall 2022, under Prof. Venkat Ramaswamy </li>
+</ul>

@@ -2,6 +2,11 @@
  * Styles for the base elements of the theme.
  ******************************************************************************/
 
+// Set Lato as the default font for the whole site
+html, body {
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+}
+
 // Typography
 
 p,
@@ -209,6 +214,9 @@ ul.task-list input[type="checkbox"] {
 
 .profile.float-right {
   margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile.float-left {
@@ -728,9 +736,6 @@ footer.sticky-bottom {
 
     li {
       margin-bottom: 1rem;
-
-      .preview {
-      }
 
       .abbr {
         margin-bottom: 0.5rem;
